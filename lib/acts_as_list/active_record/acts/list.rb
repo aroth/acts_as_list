@@ -198,11 +198,13 @@ module ActiveRecord
 
         private
           def add_to_list_top
+            return unless scope_condition
             increment_positions_on_all_items
             self[position_column] = acts_as_list_top
           end
 
           def add_to_list_bottom
+            return unless scope_condition
             if not_in_list? || default_position?
               self[position_column] = bottom_position_in_list.to_i + 1
             else
